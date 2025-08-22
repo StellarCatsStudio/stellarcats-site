@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>StellarCatsfont — Specimen</title>
+  <meta name="description" content="StellarCatsfont の文章見本・導入手順・FAQ（抜粋）">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    :root{--w:940px; --fg:#0f172a; --muted:#475569; --border:#e5e7eb; --bg:#ffffff}
+    *{box-sizing:border-box}
+    body{margin:0; font:16px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif; color:var(--fg); background:var(--bg)}
+    .container{max-width:var(--w); margin:0 auto; padding:24px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0; border-bottom:1px solid var(--border)}
+    nav a{margin-left:12px; color:inherit; text-decoration:none; padding:8px 10px; border-radius:10px}
+    nav a:hover{background:#f8fafc}
+    h1{margin:.2em 0 .2em; font-size:clamp(24px,3.5vw,36px)}
+    .lead{color:var(--muted); margin-top:0}
+    .card{border:1px solid var(--border); border-radius:16px; padding:18px; background:#fff}
+    .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:10px}
+    .out{min-height:140px; border:1px dashed var(--border); border-radius:12px; padding:14px; background:#fafafa}
+    .muted{color:var(--muted); font-size:14px}
+    .grid{display:grid; gap:16px}
+    @media(min-width:880px){ .grid-2{grid-template-columns:1fr 1fr} }
+
+    /* フォント読み込み（完成後にパスを実ファイルへ） */
+    @font-face{
+      font-family:"StellarCatsfont";
+      src:url("./StellarCatsfont_v1.0.woff2") format("woff2");
+      font-display:swap;
+    }
+    .scf{font-family:"StellarCatsfont", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif}
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div><a href="/" style="text-decoration:none;color:inherit">← Stellar Cats Studio</a></div>
+    <nav>
+      <a href="#specimen">見本</a>
+      <a href="#setup">導入</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1 class="scf">StellarCatsfont — 文章見本</h1>
+      <p class="lead">白背景×黒文字の、質素で使いやすい見本ページ。テキストはクリックして書き換えできます。</p>
+    </section>
+
+    <section id="specimen" class="card">
+      <div class="controls">
+        <label>サイズ <input id="size" type="range" min="14" max="72" value="28"></label>
+        <label>太さ
+          <select id="weight">
+            <option value="400">Regular (400)</option>
+            <option value="500">Medium (500)</option>
+            <option value="600">SemiBold (600)</option>
+            <option value="700">Bold (700)</option>
+          </select>
+        </label>
+        <label>行間 <input id="lh" type="range" min="1.2" max="2.0" step="0.05" value="1.6"></label>
+      </div>
+      <div id="out" class="out scf" contenteditable="true" aria-label="見本テキスト">
+星猫フォントで文章を書いてみました。サイズや太さを調整して雰囲気をご確認ください。
+The quick brown fox jumps over the lazy dog. 0123456789 !? ★ 「」【】（）…
+      </div>
+      <p class="muted">※ ここをクリックして自由に編集 → スクショすればサンプル画像としても使えます。</p>
+    </section>
+
+    <section id="setup" class="grid grid-2" style="margin-top:16px">
+      <div class="card">
+        <h2>導入手順</h2>
+        <ol>
+          <li>このページと同じフォルダに <code>StellarCatsfont_v1.0.woff2</code> を置く。</li>
+          <li>上の <code>@font-face</code> のファイル名を実物に合わせる。</li>
+          <li>必要に応じて <code>.otf</code> も配布（Webは <code>.woff2</code> 推奨）。</li>
+        </ol>
+        <p class="muted">用語：<strong>@font-face</strong> は“フォントを読み込むCSSの書き方”。</p>
+      </div>
+      <div class="card">
+        <h2>注意点（最小）</h2>
+        <ul>
+          <li>Windows/Mac/主要アプリで表示確認</li>
+          <li>収録文字は README と一致させる</li>
+          <li>デモ版と製品版はファイル名で明確化</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" class="card" style="margin-top:16px">
+      <h2>FAQ（抜粋）</h2>
+      <details open><summary>商用利用できますか？</summary><p>製品版のEULAに準拠します。デモ版は非商用・お試し専用です。</p></details>
+      <details><summary>収録文字は？</summary><p>最新のREADMEをご確認ください。</p></details>
+    </section>
+
+    <section class="card" style="margin-top:16px">
+      <h2>更新情報（要点）</h2>
+      <ul>
+        <li><time datetime="2025-08-22">2025/08/22</time> 見本ページ初版公開。</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const out=document.getElementById('out');
+    const size=document.getElementById('size');
+    const weight=document.getElementById('weight');
+    const lh=document.getElementById('lh');
+    function apply(){
+      out.style.fontSize=size.value+'px';
+      out.style.fontWeight=weight.value;
+      out.style.lineHeight=lh.value;
+    }
+    [size,weight,lh].forEach(el=>el.addEventListener('input',apply));
+    apply();
+  </script>
+</body>
+</html>
